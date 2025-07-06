@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Hub</title>
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+      position: relative;
+      color: #ffffff;
+    }
+
+    /* SHAPES */
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .floating-shapes span {
+      position: absolute;
+      display: block;
+      opacity: 0.12;
+      animation: float 25s linear infinite;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    .floating-shapes span.circle {
+      border-radius: 50%;
+    }
+
+    .floating-shapes span.square {
+      border-radius: 10%;
+    }
+
+    .floating-shapes span.triangle {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 30px solid white;
+      background: transparent;
+      animation: float 20s linear infinite;
+    }
+
+    .floating-shapes span:nth-child(1) { top: 10%; left: 5%; width: 40px; height: 40px; }
+    .floating-shapes span:nth-child(2) { top: 60%; left: 90%; width: 80px; height: 80px; }
+    .floating-shapes span:nth-child(3) { top: 20%; left: 40%; width: 25px; height: 25px; }
+    .floating-shapes span:nth-child(4) { top: 80%; left: 10%; width: 100px; height: 100px; }
+    .floating-shapes span:nth-child(5) { top: 50%; left: 50%; width: 30px; height: 30px; }
+    .floating-shapes span:nth-child(6) { top: 70%; left: 30%; width: 60px; height: 60px; }
+    .floating-shapes span:nth-child(7) { top: 25%; left: 80%; width: 20px; height: 20px; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-1000px) rotate(360deg); }
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #f0f0f0;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00c6ff, #007bff);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(0, 198, 255, 0.4);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 30px rgba(0, 198, 255, 0.7);
+    }
+
+    .benefits {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: left;
+      margin-top: 20px;
+      color: #eaeaea;
+    }
+
+    .benefits h2 {
+      font-size: 1.7rem;
+      margin-bottom: 15px;
+    }
+
+    .benefits ul {
+      list-style: square;
+      padding-left: 20px;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.25);
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #fff;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+
+      .benefits h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating shapes -->
+  <div class="floating-shapes">
+    <span class="circle"></span>
+    <span class="square"></span>
+    <span class="circle"></span>
+    <span class="triangle"></span>
+    <span class="square"></span>
+    <span class="circle"></span>
+    <span class="triangle"></span>
+  </div>
+
+  <!-- Main content -->
+  <main style="flex: 1;">
+    <div class="container">
+      <h1>Welcome to Quiz Hub</h1>
+      <p class="tagline">Sharpen your coding skills with quick and interactive quizzes.</p>
+
+      <div class="button-group">
+        <button onclick="goToQuiz('c')">👨‍ C Quiz</button>
+        <button onclick="goToQuiz('cpp')">💻 C++ Quiz</button>
+        <button onclick="goToQuiz('python')">🐍 Python Quiz</button>
+      </div>
+
+      <div class="benefits">
+        <h2>📚 Why Take Coding Quizzes?</h2>
+        <ul>
+          <li>Reinforce learning through active recall</li>
+          <li>Boost confidence before interviews or exams</li>
+          <li>Track progress and find weak spots</li>
+          <li>Make coding practice fun and engaging</li>
+          <li>Ideal for beginners and pros alike</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Quiz Hub. All rights reserved.
+    <br/>
+  
+  </footer>
+
+  <script>
+    function goToQuiz(type) {
+      window.location.href = type + ".html";
+    }
+  </script>
+</body>
+</html>
